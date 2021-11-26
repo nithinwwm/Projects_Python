@@ -1,0 +1,281 @@
+class Test:
+    def _init_(self):
+        self.MCQ={}
+        self.Answers={}
+        self.Difficulty_level = {}
+        self.All_Topic={}
+        
+        
+# Admin create quiz
+
+
+
+    def Create_Quiz(self):
+        how_many_topic=int(input("Enter the no of topic you want to add: "))
+        for i in range(1,how_many_topic+1):
+            topics={}
+            question_option={}
+            options={}
+            
+            input_topic=input("Enter topic")
+            self.All_Topic[i]=input_topic
+            topics["Topic"]=input_topic
+            how_many_question=int(input("Enter the no of question you want to add: "))
+
+            for j in range(1,how_many_question+1):
+                
+                answer={}
+                d_level={}
+
+                question_option={}
+
+                question_option["question"]=input("Enter the question: ")
+                options={}
+
+                option=int(input("How many option in there you want: "))
+
+                for k in range(1,option+1):
+
+                    options[k]=input("Enter the options: ")
+
+                question_option["option"]=options
+
+                topics[j]=question_option
+                d_level[j]=input("Enter Type of difficulty: ")
+                answer[j]=int(input("Enter correct answer: "))
+                
+            self.Difficulty_level[i]=d_level
+            self.Answers[i]=answer
+                
+
+            self.MCQ[i]=topics
+            
+
+
+
+
+# View Quize function start
+
+    def View_Quizzes(self):
+        for type_of_sub in self.MCQ:
+            print('Topic',str(type_of_sub)+'.',self.MCQ[type_of_sub]['Topic'])
+            print('===================')
+            question_counter = 1
+            for question_no in self.MCQ:
+                print('Q.',str(question_counter)+')',self.MCQ[type_of_sub][question_no]['question'])
+                print('=#=#=#=#=#=#=#=#=#=#=#=#=#')
+                question_counter+=1
+                option_counter = 1
+                for option in self.MCQ[type_of_sub][question_no]['option'].values():
+                    print(str(option_counter)+'.',option)
+                    option_counter+=1
+                print('\n')
+            print('\n')
+            
+            
+# End of view ^ quiz function 
+
+
+
+# Edit Quiz function start
+            
+    def Edit_Quiz(self):
+        choices = {1:'Topic',2:'Question',3:'Option'}
+        for value in choices:
+            print(str(value)+'.',choices[value])
+        edit=int(input("\n Press 1 for edit topic 2 for edit question and 3 for edit option: "))
+        
+        
+        
+        
+        if edit==1:
+            for Topic in self.MCQ:
+                print(str(Topic)+'.',self.MCQ[Topic]['Topic'])
+            topic_no=int(input("\n Enter the topic no you want to edit"))
+            self.MCQ[topic_no]['Topic']=input("Enter topic name: ")
+          
+        
+        
+        
+        elif edit==2:
+            for value in self.MCQ:
+                print(str(value)+'.',self.All_Topic[value])
+                
+            for type_of_sub in self.MCQ:
+                print(str(type_of_sub)+'.',self.MCQ[type_of_sub]['Topic'])
+                print('==================')
+                question_counter = 1
+                for question_no in self.MCQ:
+                    print(str(question_counter)+')',self.MCQ[type_of_sub][question_no]['question'])
+                    question_counter+=1
+                print()
+            topic_no=int(input("\n Enter the topic no you want to edit"))
+            Question_no=int(input("\n Enter the question no you want to edit"))
+            self.MCQ[topic_no][Question_no]['question']=input("\n Enter the question: ")
+            
+            
+            
+            
+            
+        elif edit==3:
+            for type_of_sub in self.MCQ:
+                print('Topic',str(type_of_sub)+'.',self.MCQ[type_of_sub]['Topic'])
+                print('===================')
+                question_counter = 1
+                for question_no in self.MCQ:
+                    print('Q.',str(question_counter)+')',self.MCQ[type_of_sub][question_no]['question'])
+                    print('=#=#=#=#=#=#=#=#=#=#=#=#=#')
+                    question_counter+=1
+                    option_counter = 1
+                    for option in self.MCQ[type_of_sub][question_no]['option'].values():
+                        print(str(option_counter)+'.',option)
+                        option_counter+=1
+                    print('\n')
+                print('\n')
+                
+                
+            topic_no=int(input("\n Enter the topic no you want to edit"))
+            Question_no=int(input("\n Enter the question no you want to edit"))
+            Option_no=int(input("\n Enter the option no you want to edit"))
+                
+            self.MCQ[type_of_sub][question_no]['option'][Option_no]=input("\n Enter the option: ")
+            
+# End of edit ^ quiz function              
+    
+
+    
+    
+# Delete Quize function start 
+    
+    def Delete_Quiz(self):
+        del self.MCQ
+        del self.All_Topic
+
+        
+        
+# Create Topic function start 
+            
+    def Create_Topic(self):
+        keys_len=list(self.All_Topic.keys())
+        how_many_topic=int(input("\n Enter the no of topic you want to create: "))
+        length_of_key=len(keys_len)
+        last=length_of_key+how_many_topic
+        
+        for i in range(length_of_key+1,last+1):
+            self.All_Topic[i]=input("\n Enter topic name: ")
+
+            
+# View Topic function start 
+
+    def View_Topics(self):
+        for value in self.All_Topic:
+            print(str(value)+'.',self.All_Topic[value],'\n')
+            
+            
+# Edit Topic function start 
+            
+    def Edit_Topics(self):
+        for value in self.All_Topic:
+            print(str(value)+'.',self.All_Topic[value])
+        topic_no=int(input("\n Enter the topic no you want to edit"))
+        self.All_Topic[topic_no]=input("\n Enter topic name: ")
+        
+    
+# Delete Topic function start   
+    
+    def Delete_Topics(self):
+        del self.All_Topic
+        
+        
+        
+        
+   
+            
+Admin=Test()  
+
+
+user={}
+admin={}
+
+
+def login(user_or_admin):
+    if user_or_admin=='1':
+        username=input("Enter username: ")
+        password=input("Enter password: ")
+        if username in user:
+            if user[username]==password:
+                pass
+
+            else:
+                print("\n Invaild Credentials!")
+        else:
+            print("\n Invaild Credentials!")
+
+    elif user_or_admin=='2':
+        username=input("\n Enter username: ")
+        password=input("Enter password: ")
+        if username in admin:
+            if admin[username]==password:
+                choice = {1:'press 1 for View Quizzes',2:'press 2 for Create Quiz',
+                          3:'press 3 for Edit Quiz',4:'press 4 for Delete Quiz',
+                          5:'press 5 for Create Topic',6:'press 6 for View Topics',
+                          7:'press 7 for Edit Topics',8:'press 8 for Delete Topics',
+                          9: 'press 9 for logout'
+                         }
+                while True:
+                    for value in choice:
+                        print('\n ',str(value)+'.',choice[value])
+                    action=input()
+                    if action=='1':
+                        Admin.View_Quizzes()
+                    elif action=='2':
+                        Admin.Create_Quiz()
+                    elif action=='3':
+                        Admin.Edit_Quiz()
+                    elif action=='4':
+                        Admin.Delete_Quiz()
+                    elif action=='5':
+                        Admin.Create_Topic()
+                    elif action=='6':
+                        Admin.View_Topics()
+                    elif action=='7':
+                        Admin.Edit_Topics()
+                    elif action=='8':
+                        Admin.Delete_Topics()
+                    elif action=='9':
+                        break
+                    else:
+                        print("\n Opp's invalid input! Please try again.\n ")
+
+
+            else:
+                print("\n Invaild Credentials!!")
+                login(input("Press 1 for login as user and 2 for login as admin: "))
+        else:
+            print("\n Invaild Credentials!!!")
+            login(input("Press 1 for login as user and 2 for login as admin: "))
+            
+            
+def register():       
+    user_or_admin=input("Press 1 for register as user and 2 for register as admin: ")
+    if user_or_admin=='1':
+        username=input("\n Enter username: ")
+        password=input("Enter password: ")
+        user[username]=password
+        login(input("Press 1 for login as user and 2 for login as admin: "))
+    elif user_or_admin=='2':
+        username=input("\n Enter username: ")
+        password=input("Enter password: ")
+        admin[username]=password
+        login(input("Press 1 for login as user and 2 for login as admin: "))     
+        
+            
+
+choice = {1:'press 1 for login',2:'press 2 for register: '}
+for value in choice:
+    print('\n ',str(value)+'.',choice[value])
+choice_input=int(input())
+if choice_input==1:
+    login(input("Press 1 for login as user and 2 for login as admin: "))
+elif choice_input==2:
+    register()
